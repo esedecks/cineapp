@@ -8,7 +8,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +22,8 @@ public class HomeController {
 	
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 	
-	@RequestMapping(value="/", method = RequestMethod.GET)
+	@GetMapping(value="/")
+//	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String mostrarPrincipal(Model model) {
 		List<Pelicula> peliculas = getLista(); 
 		model.addAttribute("peliculas", peliculas); 
@@ -30,9 +33,15 @@ public class HomeController {
 //		System.out.println("Lista fechas "+listaFechas);
 		return "home";
 	}
-	@RequestMapping(value="/search", method=RequestMethod.POST)
-	public String buscar(@RequestParam("fecha")String fecha) {
+	@PostMapping(value="/search")
+//	@RequestMapping(value="/search", method=RequestMethod.POST)
+	public String buscar(Model model, @RequestParam("fecha")String fecha) {
 		System.out.println("Buscando todas las peliculas en exhibición para la fecha: "+fecha);
+		List<Pelicula> peliculas = getLista(); 
+		model.addAttribute("peliculas", peliculas); 
+		model.addAttribute("fechaBusqueda", fecha);
+		List<String> listaFechas = Utileria.getNextDays(5); 
+		model.addAttribute("fechas", listaFechas); 
 		return "home";
 	}
 	

@@ -33,6 +33,7 @@ public class HomeController {
 //		System.out.println("Lista fechas "+listaFechas);
 		return "home";
 	}
+	
 	@PostMapping(value="/search")
 //	@RequestMapping(value="/search", method=RequestMethod.POST)
 	public String buscar(Model model, @RequestParam("fecha")String fecha) {

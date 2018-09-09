@@ -24,15 +24,9 @@ public class NoticiasController {
 	}
 	
 	@PostMapping(value="/save")
-	public String guardar(@RequestParam("titulo")String titulo, 
-						 @RequestParam("estatus")String estatus, 
-						 @RequestParam("detalle")String detalle,
+	public String guardar(Noticia noticia,
 						 Model model) {
-		Noticia noticia = new Noticia();
 		
-		noticia.setTitulo(titulo);
-		noticia.setStatus(estatus);
-		noticia.setDetalle(detalle);
 		/*GUARDAR EL OBJETO NOTICIA EN LA BASE DE DATOS*/
 //		System.out.println("Objeto noticia "+noticia);
 		noticiasService.guardar(noticia);

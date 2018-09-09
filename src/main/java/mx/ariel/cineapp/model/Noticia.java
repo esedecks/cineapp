@@ -2,6 +2,8 @@ package mx.ariel.cineapp.model;
 
 import java.util.Date;
 
+import org.springframework.util.SystemPropertyUtils;
+
 public class Noticia {
 	int id; 
 	String titulo;
@@ -9,6 +11,7 @@ public class Noticia {
 	String detalle; 
 	String status;
 	public Noticia() {
+		System.out.println("Contructor noticia");
 		status="Activa"; 
 		fecha = new Date();
 	}
@@ -19,6 +22,7 @@ public class Noticia {
 		this.id = id;
 	}
 	public String getTitulo() {
+		System.out.println("set titulo");
 		return titulo;
 	}
 	public void setTitulo(String titulo) {
@@ -34,12 +38,14 @@ public class Noticia {
 		return detalle;
 	}
 	public void setDetalle(String detalle) {
+		System.out.println("set detalle");
 		this.detalle = detalle;
 	}
 	public String getStatus() {
 		return status;
 	}
 	public void setStatus(String status) {
+		System.out.println("set detalle");
 		this.status = status;
 	}
 	@Override

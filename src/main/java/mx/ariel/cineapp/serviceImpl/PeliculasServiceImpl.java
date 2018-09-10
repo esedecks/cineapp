@@ -2,7 +2,6 @@ package mx.ariel.cineapp.serviceImpl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -89,6 +88,13 @@ public class PeliculasServiceImpl implements IPeliculasService {
 				return pelicula; 
 		}
 		return null; 
+	}
+
+	@Override
+	public void insertar(Pelicula pelicula) {
+		System.out.println("Insertando pelicula "+buscarTodas().size());
+		lista.add(pelicula); 
+		System.out.println("Elementos en la lista después de insesión "+buscarTodas().size());
 	}
 	
 }

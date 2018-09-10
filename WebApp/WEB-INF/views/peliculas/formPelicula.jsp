@@ -47,15 +47,15 @@
 	<h3 class="blog-title"><span class="label label-success">Datos de la Pelicula</span></h3>
       </div>
 	  
+	  
 	  <spring:hasBindErrors name="pelicula">
 		<div class="alert alert-danger" role="alert">
 			Por favor corrija los siguientes errores: 
 			<ul>
 				<c:forEach var="error" items="${errors.allErrors }">
-					<li><spring:message message="${error }"/></li>
+					<li><spring:message message="${error}"/></li>
 				</c:forEach>
 			</ul>
-			
 		</div>
 	</spring:hasBindErrors>
       <form action="${urlForm}" method="POST" >
@@ -180,7 +180,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
-    <script src="bootstrap/js/bootstrap.min.js"></script> 
+    <script src="${urlPublic}/bootstrap/js/bootstrap.min.js"></script> 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
       $(function () {

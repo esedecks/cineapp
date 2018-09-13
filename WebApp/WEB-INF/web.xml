@@ -9,6 +9,9 @@
   		<param-name>contextConfigLocation</param-name>
   		<param-value>/WEB-INF/spring/springmvc-servlet.xml</param-value>
   	</init-param>
+  	<multipart-config>
+  		<location>C:\tmp</location>
+  	</multipart-config>
   </servlet>
   
   <servlet-mapping>

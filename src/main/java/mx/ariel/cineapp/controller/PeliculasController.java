@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -16,10 +18,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import mx.ariel.cineapp.model.Pelicula;
 import mx.ariel.cineapp.service.IPeliculasService;
+import mx.ariel.cineapp.util.Utileria;
 
 @Controller
 @RequestMapping("/peliculas")
@@ -41,7 +46,11 @@ public class PeliculasController {
 	}
 	
 	@PostMapping("/save")
-	public String guardar(Pelicula pelicula, BindingResult result, RedirectAttributes attributes) {
+	public String guardar(Pelicula pelicula, 
+					BindingResult result, 
+					RedirectAttributes attributes, 
+					@RequestParam("archivoImagen") MultipartFile multipart, 
+					HttpServletRequest request) {
 		
 		if(result.hasErrors()) {
 			System.out.println("Exiten errores");
@@ -49,6 +58,11 @@ public class PeliculasController {
 				System.out.println(error.getDefaultMessage());
 			}
 			return "peliculas/formPelicula"; 
+		}
+		String nombreImagen ="" ;
+		if(!multipart.isEmpty()) {
+			nombreImagen = Utileria.guardarImagen(multipart, request);
+			pelicula.setImagen(nombreImagen);
 		}
 		System.out.println("guardando pelicula "+pelicula);
 		peliculaService.insertar(pelicula);

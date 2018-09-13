@@ -21,25 +21,7 @@
   <body>
 	
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">My CineSite</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="#">Acerca</a></li>
-            <li><a href="#">Login</a></li>            
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+    <jsp:include page="/WEB-INF/views/includes/menu.jsp"/>
 
     <div class="container theme-showcase" role="main">
 
@@ -47,15 +29,15 @@
 	<h3 class="blog-title"><span class="label label-success">Datos de la Pelicula</span></h3>
       </div>
 	  
+	  
 	  <spring:hasBindErrors name="pelicula">
 		<div class="alert alert-danger" role="alert">
 			Por favor corrija los siguientes errores: 
 			<ul>
 				<c:forEach var="error" items="${errors.allErrors }">
-					<li><spring:message message="${error }"/></li>
+					<li><spring:message message="${error}"/></li>
 				</c:forEach>
 			</ul>
-			
 		</div>
 	</spring:hasBindErrors>
       <form action="${urlForm}" method="POST" enctype="multipart/form-data" >
@@ -126,42 +108,6 @@
           </div>
         </div>
 
-        <!--  
-        <div class="page-header">
-            <h3 class="blog-title"><span class="label label-success">Detalles</span></h3>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-3">
-            <div class="form-group">
-              <label for="director">Director</label>
-              <input type="text" class="form-control" name="director" id="director" required="required" />
-            </div>  
-          </div>
-          <div class="col-sm-3">
-            <div class="form-group">
-              <label for="actores">Actores</label>
-              <input type="text" class="form-control" name="actores" id="actores" required="required" />
-            </div>  
-          </div>
-
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="trailer">URL del Trailer (Youtube)</label>
-              <input type="text" class="form-control" name="trailer" id="trailer" placeholder="URL completa del video de YOUTUBE" required="required" />
-            </div>  
-          </div> 
-        </div> 
-
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="sinopsis">Sinopsis</label>
-              <textarea class="form-control" rows="5" name="sinopsis" id="sinopsis"></textarea>
-            </div> 
-          </div> 
-        </div>
-        -->
         
         <button type="submit" class="btn btn-danger" >Guardar</button>
       </form> 
@@ -169,10 +115,11 @@
       <hr class="featurette-divider">
 
       <!-- FOOTER -->
-      <footer>        
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2017 My CineSite, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-      </footer>
+      <jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
+<!--       <footer>         -->
+<!--         <p class="pull-right"><a href="#">Back to top</a></p> -->
+<!--         <p>&copy; 2017 My CineSite, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p> -->
+<!--       </footer> -->
 
     </div> <!-- /container -->
 
@@ -180,7 +127,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
-    <script src="bootstrap/js/bootstrap.min.js"></script> 
+    <script src="${urlPublic}/bootstrap/js/bootstrap.min.js"></script> 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
       $(function () {

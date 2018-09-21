@@ -33,16 +33,30 @@ public class Utileria {
 	}
 	
 	public static String guardarImagen(MultipartFile multipart, HttpServletRequest request) {
-		String nombreOriginal = multipart.getOriginalFilename(); 
+		String nombreOriginal = multipart.getOriginalFilename().replace(" ", "-");
+		String nombreFinal = randomAlphaNumeric(8)+nombreOriginal; 
 		String pathDestino = request.getServletContext().getRealPath("/resources/images/");
+		
 		try {
-			File file = new File(pathDestino+nombreOriginal);
+			File file = new File(pathDestino+nombreFinal);
+			System.out.println("PATH DE LA IMAGEN "+file.getAbsolutePath());
 			multipart.transferTo(file);
-			return nombreOriginal; 
+			return nombreFinal; 
 		}catch(IOException ioe) {
 			ioe.printStackTrace();
 			return null; 
 		}
+	}
+	
+	public static String randomAlphaNumeric(int count) {
+		String CARACTERES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"; 
+		StringBuilder sb = new StringBuilder();
+		while(count-- != 0) {
+			int character = (int)(Math.random()*CARACTERES.length()); 
+			sb.append(CARACTERES.charAt(character)) ;
+		}
+		return sb.toString() ;
+		
 		
 	}
 }

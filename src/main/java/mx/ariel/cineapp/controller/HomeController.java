@@ -22,6 +22,8 @@ public class HomeController {
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 	@Autowired
 	IPeliculasService servicioPeliculas; 
+	// Ejercicio: Inyectar clase de servicio de Banners
+	
 	
 	@GetMapping(value="/")
 //	@RequestMapping(value="/", method = RequestMethod.GET)
@@ -32,6 +34,8 @@ public class HomeController {
 		List<String> listaFechas = Utileria.getNextDays(5); 
 		model.addAttribute("fechas", listaFechas); 
 //		System.out.println("Lista fechas "+listaFechas);
+		// Ejercicio: agregar al modelo el listado de Banners para desplegarlo
+		
 		return "home";
 	}
 	
@@ -44,6 +48,7 @@ public class HomeController {
 		model.addAttribute("fechaBusqueda", fecha);
 		List<String> listaFechas = Utileria.getNextDays(5); 
 		model.addAttribute("fechas", listaFechas); 
+		// Ejercicio: agregar al modelo el listado de Banners para desplegarlo
 		return "home";
 	}
 	
@@ -55,6 +60,7 @@ public class HomeController {
 		System.out.println("Buscando horarios para la fecha"+fecha);
 		/*Buscar en la base de datos*/
 		model.addAttribute("pelicula", servicioPeliculas.buscarPorId(id));
+		// TODO - Buscar en la base de datos los horarios.		
 		return"detalle"; 
 		
 	}

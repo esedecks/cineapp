@@ -30,6 +30,9 @@
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
+<%--         	<c:forEach var="i" begin="0" end="${}"> --%>
+        	
+<%--         	</c:forEach> --%>
           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
           <li data-target="#myCarousel" data-slide-to="1"></li>
           <li data-target="#myCarousel" data-slide-to="2"></li>         

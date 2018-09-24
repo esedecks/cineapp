@@ -16,6 +16,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,12 +42,12 @@ public class PeliculasController {
 	}
 	
 	@GetMapping("/create")
-	public String crear() {
+	public String crear(@ModelAttribute("pelicula") Pelicula pelicula) {
 		return "peliculas/formPelicula"; 
 	}
 	
 	@PostMapping("/save")
-	public String guardar(Pelicula pelicula, 
+	public String guardar(@ModelAttribute("pelicula")Pelicula pelicula, 
 					BindingResult result, 
 					RedirectAttributes attributes, 
 					@RequestParam("archivoImagen") MultipartFile multipart, 

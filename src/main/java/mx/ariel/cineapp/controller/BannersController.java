@@ -85,9 +85,10 @@ public class BannersController {
 			String nuevoNombreBanner = Utileria.guardarImagen(multipart, request); 
 			banner.setArchivo(nuevoNombreBanner);
 		}
-		redirectAttributes.addFlashAttribute("mensaje", "El banner se guardó con éxito");
+		
 		bannerServices.insertar(banner);
 		banner.setId(bannerServices.buscarTodos().size());
+		redirectAttributes.addFlashAttribute("mensaje", "El banner se guardó con éxito");
 		System.out.println("Se guardó la pelicula correctamente");
 		
 		return "redirect:/banners/index";

@@ -2,8 +2,39 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- Configuración de los beans de la capa de negocio o capa de servicio-->
 	<context:component-scan base-package="mx.ariel.cineapp.serviceImpl"/>
+	<!-- configuración de los beans de la capa de datos  -->
+	<!-- indicar a jpa donde están los repositorios DAO -->
+	
+	<jpa:repositories base-package="mx.ariel.cineapp.repository"/>
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/cineapp?useSSL=false"/>
+		<property name="username" value="root"/>
+		<property name="password" value="root"/>
+	</bean>
+	<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="generateDdl" value="false"/>
+		<property name="showSql" value="true"/>
+		<property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect"/>	
+	</bean>
+	
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="packagesToScan" value="mx.ariel.cineapp.model"/>
+		<property name="dataSource"  ref="dataSource"/>
+		<property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+	</bean>
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+	
+	</bean>
 </beans>

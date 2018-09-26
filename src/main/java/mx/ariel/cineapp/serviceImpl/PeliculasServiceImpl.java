@@ -2,6 +2,7 @@ package mx.ariel.cineapp.serviceImpl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -95,6 +96,25 @@ public class PeliculasServiceImpl implements IPeliculasService {
 		System.out.println("Insertando pelicula "+buscarTodas().size());
 		lista.add(pelicula); 
 		System.out.println("Elementos en la lista después de insesión "+buscarTodas().size());
+	}
+
+	@Override
+	public List<String> buscarGeneros() {
+		List<String> generos = new ArrayList<String>(); 
+		generos.add("Acción");
+		generos.add("Aventuras");
+		generos.add("Clásicas");
+		generos.add("Comedia y Románticas");
+		generos.add("Drama");
+		generos.add("Terror");
+		generos.add("Infantil");
+		generos.add("Acción y aventura");
+		generos.add("Romántica");
+		generos.add("Ciencia Ficción");
+		generos.add("TEST");
+		
+		
+		return generos;
 	}
 	
 }

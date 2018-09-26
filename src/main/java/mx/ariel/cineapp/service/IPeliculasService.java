@@ -10,4 +10,6 @@ public interface IPeliculasService {
 	public Pelicula buscarPorId(int idPelicula);
 	
 	public void insertar(Pelicula pelicula); 
+	
+	List<String> buscarGeneros(); 
 }

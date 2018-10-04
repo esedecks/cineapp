@@ -2,14 +2,31 @@ package mx.ariel.cineapp.model;
 
 import java.util.Date;
 
-import org.springframework.util.SystemPropertyUtils;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="noticias")
 public class Noticia {
+	//generated value cómo se incrementa la llave primati
+	//identity es para mysql, secuence es para oracle
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
 	int id; 
+	@Column(name="titulo",length=250, nullable=false)
 	String titulo;
+	@Column(name="fecha")
 	Date fecha; 
+	@Column(name="detalle")
 	String detalle; 
+	@Column(name="estatus")
 	String status;
+	
 	public Noticia() {
 		System.out.println("Contructor noticia");
 		status="Activa"; 
@@ -45,7 +62,7 @@ public class Noticia {
 		return status;
 	}
 	public void setStatus(String status) {
-		System.out.println("set detalle");
+		System.out.println("set status");
 		this.status = status;
 	}
 	@Override

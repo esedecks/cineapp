@@ -25,11 +25,11 @@ public class Noticia {
 	@Column(name="detalle")
 	String detalle; 
 	@Column(name="estatus")
-	String status;
+	String estatus;
 	
 	public Noticia() {
 		System.out.println("Contructor noticia");
-		status="Activa"; 
+		estatus="Activa"; 
 		fecha = new Date();
 	}
 	public int getId() {
@@ -58,17 +58,16 @@ public class Noticia {
 		System.out.println("set detalle");
 		this.detalle = detalle;
 	}
-	public String getStatus() {
-		return status;
+	public String getEstatus() {
+		return estatus;
 	}
-	public void setStatus(String status) {
-		System.out.println("set status");
-		this.status = status;
+	public void setEstatus(String estatus) {
+		this.estatus = estatus;
 	}
 	@Override
 	public String toString() {
-		return "Noticia [id=" + id + ", titulo=" + titulo + ", fecha=" + fecha + ", detalle=" + detalle + ", status="
-				+ status + "]";
+		return "Noticia [id=" + id + ", titulo=" + titulo + ", fecha=" + fecha + ", detalle=" + detalle + ", estatus="
+				+ estatus + "]";
 	}
 	
 	

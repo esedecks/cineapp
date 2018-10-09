@@ -1,9 +1,27 @@
 package mx.ariel.cineapp.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+@Entity
+@Table(name="peliculas")
 public class Pelicula {
-
+	
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
 	private int id;
 	private String titulo;
 	private int duracion=100;
@@ -12,9 +30,13 @@ public class Pelicula {
 	private String imagen = "cinema.png"; // imagen por default	
 	private Date fechaEstreno;	
 	private String estatus="Activa";
-	
+	//indica que un atributo de una entidad no debe ser persistente y no es tomado en cuenta al momento de guardar o de recuperarlo de la bd
+//	@Transient
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="idDetalle")
 	private Detalle detalle; 
-	
+	@OneToMany(mappedBy = "pelicula", fetch = FetchType.EAGER)
+	private List<Horario> horarios; 
 	
 	public Pelicula() {
 		super();
@@ -69,7 +91,7 @@ public class Pelicula {
 		this.estatus = estatus;
 	}
 
-	
+
 	public Detalle getDetalle() {
 		return detalle;
 	}
@@ -78,12 +100,20 @@ public class Pelicula {
 	}
 	
 	
+	public List<Horario> getHorarios() {
+		return horarios;
+	}
+	public void setHorarios(List<Horario> horarios) {
+		this.horarios = horarios;
+	}
 	@Override
 	public String toString() {
 		return "Pelicula [id=" + id + ", titulo=" + titulo + ", duracion=" + duracion + ", clasificacion="
 				+ clasificacion + ", genero=" + genero + ", imagen=" + imagen + ", fechaEstreno=" + fechaEstreno
-				+ ", estatus=" + estatus + ", detalle=" + detalle + "]";
+				+ ", estatus=" + estatus + ", detalle=" + detalle + ", horarios=" + horarios + "]";
 	}
+	
+	
 	
 	
 }

@@ -22,7 +22,7 @@ public class AppUpdate {
 		
 		Noticia noticiaToUpdate = optional.get(); 
 		noticiaToUpdate.setTitulo("Spider man Home coming");
-		noticiaToUpdate.setStatus("Inactiva");
+		noticiaToUpdate.setEstatus("Inactiva");
 		noticiaToUpdate.setDetalle("La pelicula de la araña  se repite nuevamente :d");
 		
 		System.out.println("Actualizando objeto noticia");

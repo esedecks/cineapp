@@ -23,7 +23,7 @@ public class Horario {
 	private String sala; 
 	private double precio; 
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="idPelicula")
+	@JoinColumn(name="idPelicula" )
 	private Pelicula pelicula;
 	
 	public Horario() {

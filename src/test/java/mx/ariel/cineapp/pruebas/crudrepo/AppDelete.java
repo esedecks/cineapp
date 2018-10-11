@@ -2,7 +2,7 @@ package mx.ariel.cineapp.pruebas.crudrepo;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import mx.ariel.cineapp.repository.NoticiasRepository;
+import mx.ariel.cineapp.repository.INoticiasRepository;
 
 public class AppDelete {
 	
@@ -10,7 +10,7 @@ public class AppDelete {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("root-context.xml");
 		
 		int id = 50; 
-		NoticiasRepository repo = context.getBean("noticiasRepository", NoticiasRepository.class);
+		INoticiasRepository repo = context.getBean("noticiasRepository", INoticiasRepository.class);
 		if(repo.existsById(id))
 			repo.deleteById(id);
 		else 

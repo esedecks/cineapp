@@ -3,7 +3,7 @@ package mx.ariel.cineapp.pruebas.crudrepo;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import mx.ariel.cineapp.model.Noticia;
-import mx.ariel.cineapp.repository.NoticiasRepository;
+import mx.ariel.cineapp.repository.INoticiasRepository;
 
 public class AppCreate {
 
@@ -12,7 +12,7 @@ public class AppCreate {
 		noticia.setTitulo("El rey leon");
 		noticia.setDetalle("El estreno del año es para Alfa :D");
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("root-context.xml"); 
-		NoticiasRepository repoNoticias = context.getBean("noticiasRepository", NoticiasRepository.class ); 
+		INoticiasRepository repoNoticias = context.getBean("noticiasRepository", INoticiasRepository.class ); 
 		repoNoticias.save(noticia); 
 		context.close(); 
 

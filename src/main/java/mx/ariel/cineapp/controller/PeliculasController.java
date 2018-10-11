@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.jws.WebParam.Mode;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import mx.ariel.cineapp.model.Pelicula;
+import mx.ariel.cineapp.service.IDetalleService;
 import mx.ariel.cineapp.service.IPeliculasService;
 import mx.ariel.cineapp.util.Utileria;
 
@@ -32,7 +35,8 @@ import mx.ariel.cineapp.util.Utileria;
 public class PeliculasController {
 	@Autowired
 	IPeliculasService peliculaService; 
-	
+	@Autowired
+	IDetalleService detalleService; 
 	/*Permite crear métodos para configuar el data binding directamente en el controlador*/
 	@InitBinder
 	public void initBindinder(WebDataBinder binder) {
@@ -43,7 +47,7 @@ public class PeliculasController {
 	
 	@GetMapping("/create")
 	public String crear(@ModelAttribute("pelicula") Pelicula pelicula, Model model) {
-		model.addAttribute("generos",peliculaService.buscarGeneros() );
+//		model.addAttribute("generos",peliculaService.buscarGeneros() );
 		return "peliculas/formPelicula"; 
 	}
 	
@@ -77,5 +81,20 @@ public class PeliculasController {
 		List<Pelicula> listaPeliculas = peliculaService.buscarTodas();
 		model.addAttribute("peliculas", listaPeliculas); 
 		return "peliculas/listPeliculas"; 
+	}
+	
+	@GetMapping("/edit/{id}")
+	public String editar(@PathVariable("id") Integer idPelicula, Model model ) {
+		Pelicula peliculaFromDB = peliculaService.buscarPorId(idPelicula);
+		model.addAttribute("pelicula", peliculaFromDB);
+//		model.addAttribute("generos",peliculaService.buscarGeneros() );
+		return "peliculas/formPelicula"; 
+	}
+	
+	
+	/*Esto se hace para que se obtener los generos cada vez que es llamado algún método del controlador  y no estar llamando continuamente en cada método*/
+	@ModelAttribute("generos")
+	public List<String> getGeneros(){
+		return peliculaService.buscarGeneros(); 
 	}
 }

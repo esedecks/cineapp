@@ -3,6 +3,7 @@ package mx.ariel.cineapp.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,11 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
 @Entity
 @Table(name="peliculas")
 public class Pelicula {
@@ -32,7 +32,8 @@ public class Pelicula {
 	private String estatus="Activa";
 	//indica que un atributo de una entidad no debe ser persistente y no es tomado en cuenta al momento de guardar o de recuperarlo de la bd
 //	@Transient
-	@OneToOne(fetch=FetchType.EAGER)
+	
+	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name="idDetalle")
 	private Detalle detalle; 
 	@OneToMany(mappedBy = "pelicula", fetch = FetchType.EAGER)
@@ -90,7 +91,6 @@ public class Pelicula {
 	public void setEstatus(String estatus) {
 		this.estatus = estatus;
 	}
-
 
 	public Detalle getDetalle() {
 		return detalle;

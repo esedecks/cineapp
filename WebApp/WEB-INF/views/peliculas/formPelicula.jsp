@@ -40,7 +40,7 @@
 			</ul>
 		</div>
 	</spring:hasBindErrors>
-		
+		${pelicula  }
       <form:form action="${urlForm}" method="POST" enctype="multipart/form-data" modelAttribute="pelicula" >
        	<div class="row">
           <div class="col-sm-3">
@@ -50,6 +50,7 @@
           </div>
          </div>
         <form:hidden path="id"/>
+        <form:hidden path="detalle.id"/>
         <div class="row">
           <div class="col-sm-3">
             <div class="form-group">

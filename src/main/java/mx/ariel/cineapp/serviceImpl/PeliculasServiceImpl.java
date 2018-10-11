@@ -12,7 +12,7 @@ import mx.ariel.cineapp.model.Pelicula;
 import mx.ariel.cineapp.service.IPeliculasService;
 
 @Service
-public class PeliculasServiceImpl implements IPeliculasService {
+public class PeliculasServiceImpl  {
 	List<Pelicula> lista = null;
 	
 	public PeliculasServiceImpl() {
@@ -62,7 +62,7 @@ public class PeliculasServiceImpl implements IPeliculasService {
 			pelicula5.setTitulo("Life: Vida inteligente");
 			pelicula5.setDuracion(120);
 			pelicula5.setClasificacion("B");
-			pelicula5.setGenero("Acción y acentrura");
+			pelicula5.setGenero("Acción y aventura");
 			pelicula5.setFechaEstreno(formatter.parse("06-06-2017"));
 			pelicula5.setImagen("estreno5.png"); // Nombre del archivo de imagen
 			pelicula5.setEstatus("Activa"); // Esta pelicula estara inactiva
@@ -77,12 +77,12 @@ public class PeliculasServiceImpl implements IPeliculasService {
 		}
 	}
 	
-	@Override
+//	@Override
 	public List<Pelicula> buscarTodas() {
 		return lista;
 	}
 
-	@Override
+//	@Override
 	public Pelicula buscarPorId(int idPelicula) {
 		for (Pelicula pelicula : lista) {
 			if(pelicula.getId() == idPelicula)
@@ -91,14 +91,14 @@ public class PeliculasServiceImpl implements IPeliculasService {
 		return null; 
 	}
 
-	@Override
+//	@Override
 	public void insertar(Pelicula pelicula) {
 		System.out.println("Insertando pelicula "+buscarTodas().size());
 		lista.add(pelicula); 
 		System.out.println("Elementos en la lista después de insesión "+buscarTodas().size());
 	}
 
-	@Override
+//	@Override
 	public List<String> buscarGeneros() {
 		List<String> generos = new ArrayList<String>(); 
 		generos.add("Acción");
@@ -111,9 +111,6 @@ public class PeliculasServiceImpl implements IPeliculasService {
 		generos.add("Acción y aventura");
 		generos.add("Romántica");
 		generos.add("Ciencia Ficción");
-		generos.add("TEST");
-		
-		
 		return generos;
 	}
 	

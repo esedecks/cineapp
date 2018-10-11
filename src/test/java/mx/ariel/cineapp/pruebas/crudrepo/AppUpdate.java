@@ -5,13 +5,13 @@ import java.util.Optional;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import mx.ariel.cineapp.model.Noticia;
-import mx.ariel.cineapp.repository.NoticiasRepository;
+import mx.ariel.cineapp.repository.INoticiasRepository;
 
 public class AppUpdate {
 
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("root-context.xml");
-		NoticiasRepository noticiaRepository = context.getBean("noticiasRepository", NoticiasRepository.class);
+		INoticiasRepository noticiaRepository = context.getBean("noticiasRepository", INoticiasRepository.class);
 		Optional<Noticia> optional = noticiaRepository.findById(2); 
 		
 		if(!optional.isPresent()) {

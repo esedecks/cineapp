@@ -8,14 +8,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import mx.ariel.cineapp.model.Noticia;
-import mx.ariel.cineapp.repository.NoticiasRepository;
+import mx.ariel.cineapp.repository.INoticiasRepository;
 
 public class AppPagingAndSorting {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("root-context.xml"); 
-		NoticiasRepository repo = context.getBean("noticiasRepository", NoticiasRepository.class); 
+		INoticiasRepository repo = context.getBean("noticiasRepository", INoticiasRepository.class); 
 		/*Obtener registros por ordenamiento*/
 //		List<Noticia> noticiasList = repo.findAll(Sort.by("titulo").descending());
 //		List<Noticia> noticiasList = repo.findAll(Sort.by("fecha").descending().and(Sort.by("titulo").ascending()));

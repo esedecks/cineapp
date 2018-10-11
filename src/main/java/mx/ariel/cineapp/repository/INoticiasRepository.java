@@ -11,7 +11,7 @@ import mx.ariel.cineapp.model.Noticia;
 
 @Repository("noticiasRepository")
 //public interface NoticiasRepository extends CrudRepository<Noticia, Integer> {
-public interface NoticiasRepository extends JpaRepository<Noticia, Integer> {
+public interface INoticiasRepository extends JpaRepository<Noticia, Integer> {
 	/*Busca todos 
 	 * select * from Noticias; 
 	 * */

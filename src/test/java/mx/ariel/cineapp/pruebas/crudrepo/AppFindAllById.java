@@ -6,13 +6,13 @@ import java.util.List;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import mx.ariel.cineapp.model.Noticia;
-import mx.ariel.cineapp.repository.NoticiasRepository;
+import mx.ariel.cineapp.repository.INoticiasRepository;
 
 public class AppFindAllById {
 
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("root-context.xml"); 
-		NoticiasRepository repoNoticias = context.getBean("noticiasRepository", NoticiasRepository.class ); 
+		INoticiasRepository repoNoticias = context.getBean("noticiasRepository", INoticiasRepository.class ); 
 		List<Integer> ids = new ArrayList<>(); 
 		ids.add(1); 
 		ids.add(4); 

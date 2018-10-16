@@ -13,6 +13,10 @@
     <spring:url  value="/resources"  var="urlPublic"/>
     <spring:url value="/peliculas/create" var="nuevaPelicula"/>
     <spring:url value="/peliculas/edit" var="urlEdit"/>
+    <spring:url value="/peliculas/delete" var="urlDelete"/>
+    <spring:url value="/peliculas" var="urlPeliculas"/>
+    
+    
     <link href="${urlPublic}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="${urlPublic}/bootstrap/css/theme.css" rel="stylesheet">
     
@@ -45,7 +49,7 @@
             	</tr>
         	</thead>
         	<tbody>
-        		<c:forEach var="pelicula" items="${peliculas}">
+        		<c:forEach var="pelicula" items="${peliculas.content}">
         			<tr>
 		                <td>${pelicula.titulo}</td>
 		                <td>${pelicula.genero}</td>
@@ -66,37 +70,19 @@
 		                </td>
 		                <td>
 		                    <a href="${urlEdit}/${pelicula.id}" class="btn btn-success btn-sm" role="button" title="Edit" ><span class="glyphicon glyphicon-pencil"></span></a>
-		                    <a href="#" class="btn btn-danger btn-sm" role="button" title="Eliminar" ><span class="glyphicon glyphicon-trash"></span></a>
+		                    <a href="${urlDelete}/${pelicula.id}" onclick="return confirm('¿Está seguro?')" class="btn btn-danger btn-sm" role="button" title="Eliminar" ><span class="glyphicon glyphicon-trash"></span></a>
 		                </td>
             		</tr>
         		</c:forEach>
         	</tbody>
-            
-<!--             <tr> -->
-<!--                 <td>titulo</td> -->
-<!--                 <td>genero</td> -->
-<!--                 <td>clasificacion</td> -->
-<!--                 <td>duracion</td> -->
-<!--                 <td>2017-05-05</td> -->
-<!--                 <td><span class="label label-success">estatus</span></td> -->
-<!--                 <td> -->
-<!--                     <a href="#" class="btn btn-success btn-sm" role="button" title="Edit" ><span class="glyphicon glyphicon-pencil"></span></a> -->
-<!--                     <a href="#" class="btn btn-danger btn-sm" role="button" title="Eliminar" ><span class="glyphicon glyphicon-trash"></span></a> -->
-<!--                 </td> -->
-<!--             </tr> -->
-<!--             <tr> -->
-<!--                 <td>titulo</td> -->
-<!--                 <td>genero</td> -->
-<!--                 <td>clasificacion</td> -->
-<!--                 <td>duracion</td> -->
-<!--                 <td>2017-05-05</td> -->
-<!--                 <td><span class="label label-danger">estatus</span></td> -->
-<!--                 <td> -->
-<!--                     <a href="#" class="btn btn-success btn-sm" role="button" title="Edit" ><span class="glyphicon glyphicon-pencil"></span></a> -->
-<!--                     <a href="#" class="btn btn-danger btn-sm" role="button" title="Eliminar" ><span class="glyphicon glyphicon-trash"></span></a> -->
-<!--                 </td> -->
-<!--             </tr> -->
         </table>
+        
+        <nav aria-label="">
+        	<ul class ="pager">
+        		<li><a href ="${urlPeliculas}/indexPaginate?page=${peliculas.number-1}">Anterior</a></li>
+        		<li><a href ="${urlPeliculas}/indexPaginate?page=${peliculas.number+1}">Siguiente</a></li>
+        	</ul>
+        </nav>
       </div>
           
       <hr class="featurette-divider">

@@ -1,4 +1,5 @@
 <%@taglib uri="http://www.springframework.org/tags"  prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags/form"  prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
@@ -11,8 +12,8 @@
       <meta name="author" content="">
       <title>Creacion de imagenes del Banner</title>    
 		
-		<spring:url value="/resources" var="urlPublic"/>	
-		<spring:url value="/banners/save" var="guardarBanner"/>
+	<spring:url value="/resources" var="urlPublic"/>	
+	<spring:url value="/banners/save" var="guardarBanner"/>
       <link href="${urlPublic}/bootstrap/css/bootstrap.min.css" rel="stylesheet">   
       <link href="${urlPublic}/bootstrap/css/theme.css" rel="stylesheet">
 
@@ -36,12 +37,13 @@
 				</ul>
 			</div>
 		</spring:hasBindErrors>
-         <form method="POST" action="${guardarBanner}" enctype="multipart/form-data">
+         <form:form method="POST" action="${guardarBanner}" enctype="multipart/form-data" modelAttribute="banner">
+            <form:hidden path="id"/>
             <div class="row">         
                <div class="col-sm-6">
                   <div class="form-group">
                      <label for="titulo">Titulo</label>             
-                     <input type="text" class="form-control" name="titulo" id="titulo" required="required"/>
+                     <form:input type="text" class="form-control" path="titulo" id="titulo" required="required"/>
                   </div>
                </div>
 
@@ -49,7 +51,8 @@
                <div class="col-sm-3">
                   <div class="form-group">
                      <label for="imagen">Imagen</label>
-                     <input type="file" id="archivoImagen" name="archivoImagen" required="required" />
+                     <form:hidden path="archivo"/>
+                     <input type="file" id="archivoImagen" name="archivoImagen"  />
                      <p class="help-block">Tamaño recomendado: 1140 x 250 </p>
                   </div> 
                </div> 
@@ -57,16 +60,16 @@
                <div class="col-sm-3">
                   <div class="form-group">
                      <label for="estatus">Estatus</label>             
-                     <select id="estatus" name="estatus" class="form-control">
-                        <option value="Activo">Activo</option>
-                        <option value="Inactivo">Inactivo</option>                
-                     </select>  
+                     <form:select id="estatus" path="estatus" class="form-control">
+                        <form:option value="Activo">Activo</form:option>
+                        <form:option value="Inactivo">Inactivo</form:option>                
+                     </form:select>  
                   </div>
                </div>
             </div>
 
             <button type="submit" class="btn btn-danger" >Guardar</button>
-         </form> 
+         </form:form> 
 
          <hr class="featurette-divider">
 

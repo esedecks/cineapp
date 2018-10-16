@@ -14,6 +14,8 @@
     <spring:url value="/resources" var="urlPublic" />
     <spring:url value="/" var="urlRoot"/>
     <spring:url value="/banners/create" var="nuevoBanner"/>
+    <spring:url value="/banners/modify" var="modificarBanner"/>
+    <spring:url value="/banners/delete" var="borrarBanner"/>
     <link href="${urlPublic}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="${urlPublic}/bootstrap/css/theme.css" rel="stylesheet">
     
@@ -57,7 +59,6 @@
 		             </td>    
 	                <td>${currentBanner.archivo}</td>                         
 	                <td>
-	                	
 	                	<c:choose>
 	                		<c:when test="${currentBanner.estatus eq 'Activo' }">
 	                			<span class="label label-success">
@@ -74,8 +75,8 @@
 	                	
 	                </td>
 	                <td>
-	                    <a href="#" class="btn btn-success btn-sm" role="button" title="Edit" ><span class="glyphicon glyphicon-pencil"></span></a>
-	                    <a href="#" class="btn btn-danger btn-sm" role="button" title="Eliminar" ><span class="glyphicon glyphicon-trash"></span></a>
+	                    <a href="${modificarBanner}/${currentBanner.id}" class="btn btn-success btn-sm" role="button" title="Edit" ><span class="glyphicon glyphicon-pencil"></span></a>
+	                    <a href="${borrarBanner}/${currentBanner.id}" class="btn btn-danger btn-sm" role="button" title="Eliminar" ><span class="glyphicon glyphicon-trash"></span></a>
 	                </td>
             	</tr>
             </c:forEach>

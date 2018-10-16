@@ -5,11 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.jws.WebParam.Mode;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -73,7 +74,7 @@ public class PeliculasController {
 		System.out.println("guardando pelicula "+pelicula);
 		peliculaService.insertar(pelicula);
 		attributes.addFlashAttribute("mensaje","La pelicula se guardo con éxito");
-		return "redirect:/peliculas/index"; 
+		return "redirect:/peliculas/indexPaginate"; 
 	}
 	
 	@GetMapping ("/index")
@@ -83,6 +84,14 @@ public class PeliculasController {
 		return "peliculas/listPeliculas"; 
 	}
 	
+	@GetMapping("/indexPaginate")
+	public String mostrarIndexPaginado(Model model , Pageable page) {
+		Page<Pelicula> lista =peliculaService.buscarTodas(page) ;
+		model.addAttribute("peliculas", lista); 
+		return "peliculas/listPeliculas"; 
+	}
+	
+	
 	@GetMapping("/edit/{id}")
 	public String editar(@PathVariable("id") Integer idPelicula, Model model ) {
 		Pelicula peliculaFromDB = peliculaService.buscarPorId(idPelicula);
@@ -90,6 +99,14 @@ public class PeliculasController {
 //		model.addAttribute("generos",peliculaService.buscarGeneros() );
 		return "peliculas/formPelicula"; 
 	}
+	
+	@GetMapping("/delete/{id}")
+	public String eliminar(@PathVariable("id") Integer idPelicula, RedirectAttributes attribute) {
+		peliculaService.eliminar(idPelicula);
+		attribute.addFlashAttribute("mensaje", "La pelicula fue eliminada");
+		return "redirect:/peliculas/indexPaginate"; 
+	}
+	
 	
 	
 	/*Esto se hace para que se obtener los generos cada vez que es llamado algún método del controlador  y no estar llamando continuamente en cada método*/

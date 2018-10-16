@@ -3,13 +3,26 @@ package mx.ariel.cineapp.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+
+@Entity
+@Table(name="banners")
 public class Banner {
 
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
 	private String titulo;
 	private Date fecha; // Fecha de Publicacion del Banner
-	private String archivo; // atributo para guardar el nombre de la imagen
+	private String archivo="slide1.jpg"; // atributo para guardar el nombre de la imagen
 	private String estatus;
+	@Transient
 	private String fechaEstreno;
 	
 	/**

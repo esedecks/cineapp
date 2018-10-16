@@ -5,16 +5,22 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import mx.ariel.cineapp.model.Detalle;
+import mx.ariel.cineapp.model.Horario;
 import mx.ariel.cineapp.model.Pelicula;
 import mx.ariel.cineapp.service.IBannersService;
+import mx.ariel.cineapp.service.IHorariosService;
 import mx.ariel.cineapp.service.IPeliculasService;
 import mx.ariel.cineapp.util.Utileria;
 @Controller
@@ -26,7 +32,8 @@ public class HomeController {
 	// Ejercicio: Inyectar clase de servicio de Banners
 	@Autowired
 	IBannersService bannerServices ; 
-	
+	@Autowired
+	IHorariosService horariosServices ; 
 	@GetMapping(value="/")
 //	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String mostrarPrincipal(Model model) {
@@ -59,12 +66,21 @@ public class HomeController {
 //	@RequestMapping(value="/detail/{id}/{fecha}", method = RequestMethod.GET)
 	@RequestMapping(value="/detail", method = RequestMethod.GET)
 //	public String mostrarDetalle(@PathVariable("id") int id,@PathVariable("fecha")String fecha, Model model) {
-	public String mostrarDetalle(@RequestParam("idMovie")int id,@RequestParam("fecha")String fecha, Model model) {
+	public String mostrarDetalle(@RequestParam("idMovie")int id,@RequestParam("fecha")Date fecha, Model model) {
 		/*Buscar en la base de datos*/
+		List<Horario> horarios = horariosServices.buscarPorIdPelicula(id, fecha);
 		model.addAttribute("pelicula", servicioPeliculas.buscarPorId(id));
-		// TODO - Buscar en la base de datos los horarios.		
+		model.addAttribute("horarios", horarios);
+		model.addAttribute("fechaBusqueda", dateFormat.format(fecha));
 		return"detalle"; 
 		
+	}
+	
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy"); 
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 	}
 	
 

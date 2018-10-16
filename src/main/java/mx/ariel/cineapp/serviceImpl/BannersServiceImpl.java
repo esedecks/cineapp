@@ -2,7 +2,6 @@ package mx.ariel.cineapp.serviceImpl;
 
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -10,8 +9,8 @@ import org.springframework.stereotype.Service;
 import mx.ariel.cineapp.model.Banner;
 import mx.ariel.cineapp.service.IBannersService;
 
-@Service
-public class BannersServiceImpl implements IBannersService {
+//@Service
+public class BannersServiceImpl  {
 
 	private List<Banner> lista = null; 
 	/**
@@ -54,7 +53,7 @@ public class BannersServiceImpl implements IBannersService {
 	/**
 	 * Insertamos un objeto de tipo Banner a la lista
 	 */
-	@Override
+//	@Override
 	public void insertar(Banner banner) {
 		
 		// Ejercicio: Implementar metodo
@@ -65,7 +64,7 @@ public class BannersServiceImpl implements IBannersService {
 	/**
 	 * Regresamos la lista de objetos Banner
 	 */
-	@Override
+//	@Override
 	public List<Banner> buscarTodos() {
 		// Ejercicio: Implementar metodo
 		return lista;

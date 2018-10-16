@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +28,8 @@ import mx.ariel.cineapp.util.Utileria;
 public class BannersController {
 
 	// Ejercicio: Inyectar instancia de la clase de servicio
-	@Autowired IBannersService bannerServices; 
+	@Autowired
+	IBannersService bannerServices; 
 	/**
 	 * Metodo para mostrar el listado de banners
 	 * @param model
@@ -49,8 +52,7 @@ public class BannersController {
 	 * @return
 	 */
 	@GetMapping("/create")
-	public String crear() {
-		
+	public String crear(@ModelAttribute("banner") Banner banner) {
 		// Ejercicio: Crear vista formBanner.jsp. Utilizar el archivo formBanner.html de la plantilla 
 		return "banners/formBanner";
 		
@@ -92,5 +94,24 @@ public class BannersController {
 		System.out.println("Se guardó la pelicula correctamente");
 		
 		return "redirect:/banners/index";
+	}	
+	/**
+	 * Metodo para guardar el objeto de modelo de tipo Banner
+	 * @return
+	 */
+	@GetMapping("/delete/{id}")
+	public String borrar(@PathVariable("id") int idBanner, RedirectAttributes attributes) {
+		bannerServices.eliminar(idBanner);	
+		attributes.addFlashAttribute("mensaje", "Se eliminó el banner con éxito"); 
+		return "redirect:/banners/index";
+	}	
+	/**
+	 * Metodo para guardar el objeto de modelo de tipo Banner
+	 * @return
+	 */
+	@GetMapping("/modify/{id}")
+	public String modificar(@PathVariable("id") int idBanner, Model model) {
+		model.addAttribute("banner", bannerServices.buscarPorId(idBanner)); 
+		return "banners/formBanner";
 	}	
 }

@@ -33,7 +33,7 @@ public class Pelicula {
 	//indica que un atributo de una entidad no debe ser persistente y no es tomado en cuenta al momento de guardar o de recuperarlo de la bd
 //	@Transient
 	
-	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@OneToOne(fetch=FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
 	@JoinColumn(name="idDetalle")
 	private Detalle detalle; 
 	@OneToMany(mappedBy = "pelicula", fetch = FetchType.EAGER)
@@ -106,12 +106,12 @@ public class Pelicula {
 	public void setHorarios(List<Horario> horarios) {
 		this.horarios = horarios;
 	}
-	@Override
-	public String toString() {
-		return "Pelicula [id=" + id + ", titulo=" + titulo + ", duracion=" + duracion + ", clasificacion="
-				+ clasificacion + ", genero=" + genero + ", imagen=" + imagen + ", fechaEstreno=" + fechaEstreno
-				+ ", estatus=" + estatus + ", detalle=" + detalle + ", horarios=" + horarios + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Pelicula [id=" + id + ", titulo=" + titulo + ", duracion=" + duracion + ", clasificacion="
+//				+ clasificacion + ", genero=" + genero + ", imagen=" + imagen + ", fechaEstreno=" + fechaEstreno
+//				+ ", estatus=" + estatus + ", detalle=" + detalle + ", horarios=" + horarios + "]";
+//	}
 	
 	
 	

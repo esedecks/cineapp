@@ -7,7 +7,8 @@ import mx.ariel.cineapp.model.Banner;
 
 public interface IBannersService {
 
-	void insertar(Banner banner); 
+	public void insertar(Banner banner); 
 	List<Banner> buscarTodos();
-	
+	public void eliminar(int idBanner); 
+	public Banner buscarPorId(int idBanner); 
 }

@@ -9,7 +9,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import mx.ariel.cineapp.model.Pelicula;
-import mx.ariel.cineapp.service.IPeliculasService;
 
 @Service
 public class PeliculasServiceImpl  {

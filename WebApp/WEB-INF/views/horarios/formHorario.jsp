@@ -36,14 +36,11 @@
 					</ul>
 				</div>
 			</spring:hasBindErrors>
-			${horario}
+<%-- 			${horario} --%>
 			
-			<c:if test="${mensaje ne null }">
-				<div class="alert alert-success" role="alert">
-					${mensaje}
-				</div>
-			</c:if>
+			
 			<form:form action="${urlForm}" method="POST" modelAttribute="horario">
+				<form:hidden path="id" />
 				<div class="row">         
 					<div class="col-sm-3">
 						<div class="form-group">

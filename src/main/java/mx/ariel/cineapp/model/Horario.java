@@ -21,7 +21,7 @@ public class Horario {
 	private String hora; //HH:mm
 	private String sala; 
 	private double precio; 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="idPelicula" )
 	private Pelicula pelicula;
 	

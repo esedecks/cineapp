@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import mx.ariel.cineapp.model.Detalle;
 import mx.ariel.cineapp.model.Horario;
 import mx.ariel.cineapp.model.Pelicula;
 import mx.ariel.cineapp.service.IBannersService;
 import mx.ariel.cineapp.service.IHorariosService;
+import mx.ariel.cineapp.service.INoticiasService;
 import mx.ariel.cineapp.service.IPeliculasService;
 import mx.ariel.cineapp.util.Utileria;
 @Controller
@@ -34,6 +34,9 @@ public class HomeController {
 	IBannersService bannerServices ; 
 	@Autowired
 	IHorariosService horariosServices ; 
+	@Autowired
+	INoticiasService noticiasServices; 
+	
 	@GetMapping(value="/")
 //	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String mostrarPrincipal(Model model) {
@@ -46,6 +49,8 @@ public class HomeController {
 		// Ejercicio: agregar al modelo el listado de Banners para desplegarlo
 		model.addAttribute("bannerList", bannerServices.buscarTodos()); 
 		
+		/*Agregar las últimas 3 noticias activas*/
+		model.addAttribute("noticias", noticiasServices.obtenerUltimasNoticias());
 		return "home";
 	}
 	
@@ -74,6 +79,18 @@ public class HomeController {
 		model.addAttribute("fechaBusqueda", dateFormat.format(fecha));
 		return"detalle"; 
 		
+	}
+	
+	
+	
+	@GetMapping(value="/about")
+	public String mostrarAcerca() {
+		return "acerca";
+	}
+	
+	@GetMapping(value="/login")
+	public String mostrarLogin() {
+		return "formLogin";
 	}
 	
 	

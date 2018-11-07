@@ -2,10 +2,8 @@ package mx.ariel.cineapp.serviceImpl;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
 
 import mx.ariel.cineapp.model.Noticia;
-import mx.ariel.cineapp.service.INoticiasService;
 
 //@Service
 public class NoticiasServiceImpl  {

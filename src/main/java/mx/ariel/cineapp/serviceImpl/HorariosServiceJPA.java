@@ -45,4 +45,9 @@ public class HorariosServiceJPA implements IHorariosService {
 	public void eliminar(int id) {
 		horariosRepo.deleteById(id);
 	}
+
+	@Override
+	public List<Horario> buscarPorFechaAndPeliculaEstatus(  Date fecha,String estatus) {
+		return horariosRepo.findByHorarioAndEstatusPelicula(fecha,estatus);
+	}
 }

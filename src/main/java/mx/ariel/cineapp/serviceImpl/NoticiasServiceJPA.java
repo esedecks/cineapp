@@ -41,7 +41,7 @@ public class NoticiasServiceJPA implements INoticiasService{
 
 	@Override
 	public List<Noticia> obtenerUltimasNoticias() {
-		return noticiasRepository.findTop3ByOrderByFechaDesc();
+		return noticiasRepository.findTop3ByEstatusOrderByIdDesc("Activa"); 
 	}
 
 }

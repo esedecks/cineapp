@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<b:beans xmlns="http://www.springframework.org/schema/security"
+   xmlns:b="http://www.springframework.org/schema/beans" 
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/security 
+     http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<!-- Todas las urls de la aplicación están protegidas -->
+<!--    <http /> -->
+	<!-- Dar acceso a las urls en función de un rol determinado -->
+	<http auto-config="true">
+		<!-- Declaramos todos los recursos que estarán protegidos -->
+		<intercept-url pattern="/peliculas/*" access="hasAnyAuthority('EDITOR','GERENTE')"/>
+		<intercept-url pattern="/horarios/*" access="hasAnyAuthority('EDITOR','GERENTE')"/>
+		<intercept-url pattern="/noticias/*" access="hasAnyAuthority('EDITOR','GERENTE')"/>
+		<intercept-url pattern="/banners/*" access="hasAnyAuthority('GERENTE')"/>
+		<!-- log in personalizado -->
+		<form-login login-page="/formLogin"
+					default-target-url="/admin/index"
+		 />
+	</http>
+   	
+   	<authentication-manager>
+      <authentication-provider>
+      	<jdbc-user-service data-source-ref="dataSource"
+      		users-by-username-query="select cuenta,pwd,activo from usuarios where cuenta = ?"
+			authorities-by-username-query="select cuenta,perfil from perfiles where cuenta = ?"/>
+      </authentication-provider>
+<!--    <authentication-manager> -->
+<!--       <authentication-provider> -->
+<!--       	<jdbc-user-service data-source-ref="dataSource" -->
+<!--       		users-by-username-query="select cuenta,pwd,activo from Usuarios where cuenta = ?" -->
+<!-- 			authorities-by-username-query="select cuenta,perfil from Perfiles where cuenta = ?"/> -->
+<!-- 		<user-service> -->
+<!-- 		  <user name="luis" password="{noop}luis123" authorities="EDITOR" />		   -->
+<!-- 		  <user name="marisol" password="{noop}mari123" authorities="GERENTE" />   -->
+<!-- 		</user-service> -->
+<!--       </authentication-provider> -->
+
+   </authentication-manager>
+
+</b:beans>

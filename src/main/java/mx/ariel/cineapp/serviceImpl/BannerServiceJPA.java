@@ -36,6 +36,11 @@ public class BannerServiceJPA implements IBannersService{
 			return bannerOption.get(); 
 		return null;
 	}
+
+	@Override
+	public List<Banner> buscarActivos() {
+		return bannerRepo.buscarActivos();
+	}
 	
 	
 

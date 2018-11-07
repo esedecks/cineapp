@@ -11,4 +11,5 @@ public interface IHorariosService {
 	List<Horario> buscarTodos(); 
 	Horario buscarPorId(int id); 
 	public void eliminar(int id); 
+	List<Horario> buscarPorFechaAndPeliculaEstatus(Date fecha,String estatus); 
 }

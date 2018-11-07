@@ -1,5 +1,6 @@
 package mx.ariel.cineapp.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -19,4 +20,6 @@ public interface IPeliculasService {
 	public void eliminar(int idPelicula);
 	
 	public Page<Pelicula> buscarTodas(Pageable page); 
+	
+	public List<Pelicula>  buscarPorFechaYestatus( Date fecha, String status);
 }

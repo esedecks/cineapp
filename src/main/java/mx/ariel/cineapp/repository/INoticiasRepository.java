@@ -42,5 +42,5 @@ public interface INoticiasRepository extends JpaRepository<Noticia, Integer> {
 	List<Noticia> findByFechaBetween(Date fecha1, Date fecha2); 
 	List<Noticia> findByIdBetween(Integer i, Integer f); 
 	
-	List<Noticia> findTop3ByOrderByFechaDesc();
+	List<Noticia> findTop3ByEstatusOrderByIdDesc(String estatus);
 }

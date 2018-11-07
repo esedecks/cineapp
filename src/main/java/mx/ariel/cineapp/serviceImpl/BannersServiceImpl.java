@@ -4,10 +4,8 @@ package mx.ariel.cineapp.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
 
 import mx.ariel.cineapp.model.Banner;
-import mx.ariel.cineapp.service.IBannersService;
 
 //@Service
 public class BannersServiceImpl  {

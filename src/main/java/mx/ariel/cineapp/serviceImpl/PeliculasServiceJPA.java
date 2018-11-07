@@ -1,6 +1,7 @@
 package mx.ariel.cineapp.serviceImpl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import mx.ariel.cineapp.model.Horario;
 import mx.ariel.cineapp.model.Pelicula;
+import mx.ariel.cineapp.repository.IHorariosRepository;
 import mx.ariel.cineapp.repository.IPeliculasRepository;
 import mx.ariel.cineapp.service.IPeliculasService;
 
@@ -18,6 +21,8 @@ public class PeliculasServiceJPA implements IPeliculasService {
 
 	@Autowired
 	private IPeliculasRepository peliculasRepo; 
+	@Autowired 
+	IHorariosRepository horariosRepo; 
 	
 	@Override
 	public List<Pelicula> buscarTodas() {
@@ -62,6 +67,16 @@ public class PeliculasServiceJPA implements IPeliculasService {
 	@Override
 	public Page<Pelicula> buscarTodas(Pageable page) {
 		return peliculasRepo.findAll(page);
+	}
+
+	@Override
+	public List<Pelicula> buscarPorFechaYestatus( Date fecha, String estatus) {
+		List<Horario> horarios = horariosRepo.findByHorarioAndEstatusPelicula(fecha, estatus);  
+		List<Pelicula> peliculas = new ArrayList<>(); 
+		for (Horario h :horarios) {
+			peliculas.add(h.getPelicula()); 
+		}
+		return peliculas; 
 	}
 
 	
